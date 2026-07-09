@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jstruve.dev</title>
+  <meta name="description" content="Josh Struve | Senior Design Engineer: Design Systems, Accessibility and Applied AI.">
+  <link rel="stylesheet" href="https://use.typekit.net/oep2nml.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg py-0">
+    <div class="container">
+      <a class="navbar-brand py-3" href="/">Josh Struve</a>
+      <div class="navbar d-none d-lg-block" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="#connect">Connect</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <hr class="my-0" style="border-color:var(--foreground-color); opacity: 1;">
+        <h1 class="mb-1 pt-5">Senior Design Engineer</h1>
+        <p class="mb-0 sub-title pb-3">Design Systems — Accessibility — Applied AI</p>
+        
+        <div class="truchet-canvas-wrapper">
+          <canvas id="truchetCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="pt-5">
+      <div class="container">
+        <div class="row g-3">
+          <div class="col-12 col-lg-8">
+            <h2 class="mb-1">About</h2>
+            <p class="mb-0">Senior Design Engineer with 25 years of experience specializing in design systems, accessibility, and applied AI.</p>
+          </div>
+        </div>
+
+        <!-- Skills injected here -->
+        <div class="row g-3 pt-3" id="skills-container"></div>
+        
+        <div class="row">
+          <div class="col-12 mt-5 text-center">
+            <a class="btn btn-primary focus-ring" href="/downloads/josh-struve-resume-2026.pdf" download>Download resume</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="pt-5">
+      <div class="container">
+        <h2 class="mb-1">Work</h2>
+        <p>Enterprise and independent projects demonstrating expertise in design systems, accessibility, and front-end architecture.</p>
+        <hr class="my-0" style="border-color:var(--foreground-color); opacity: 1;">
+
+        <!-- Work items injected here -->
+        <div id="work-container"></div>
+      </div>
+    </section>
+
+    <section id="connect">
+      <div class="container pt-5">
+        <div class="row g-3">
+          <div class="col-12 col-lg-8">
+            <h2 class="mb-1">Connect</h2>
+            <p class="mb-0">LinkedIn is the best way to reach me, so please connect.</p>
+            <a class="btn btn-primary focus-ring mt-5" href="https://www.linkedin.com/in/joshstruve/" target="_blank">Connect on LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container pt-5">
+      <hr class="mt-0" style="border-color:var(--foreground-color); opacity: 1;">
+      <p class="text-end">&copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>

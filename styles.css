@@ -1,0 +1,228 @@
+:root {
+    --primary-color: oklch(63.9% 0.21 5.3);
+    --background-color: oklch(28.9% 0.007 211.1);
+    --foreground-color: oklch(90.4% 0.015 123.1);
+    --font-family-header: "univers-next-pro", sans-serif;
+    --font-family-body: "inter-variable", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    font-display: swap;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family-body);
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    overflow-x: hidden;
+    font-size: 1rem;
+    -webkit-font-smoothing: antialiased;
+    opacity: 0.01;
+    animation: fadeInEntrance 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    will-change: opacity;
+}
+
+@keyframes fadeInEntrance {
+  from {
+      opacity: 0.01;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6, .small {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-family: var(--font-family-header);
+    font-weight: 700;
+}
+
+.h1, h1 {
+  font-size: clamp(2.1rem, 4.6vw, 2.986rem);
+}
+
+.h2, h2 {
+  font-size: clamp(1.8rem, 3.8vw, 2.488rem);
+}
+
+.h3, h3 {
+  font-size: clamp(1.55rem, 3.2vw, 2.074rem);
+}
+
+.h4, h4 {
+  font-size: clamp(1.35rem, 2.6vw, 1.728rem);
+}
+
+.h5, h5 {
+  font-size: clamp(1.2rem, 2.1vw, 1.44rem);
+}
+
+.h6, h6 {
+  font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+}
+
+.small {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: var(--foreground);
+}
+
+.sub-title {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: .85rem;
+  font-weight: 500;
+}
+
+a {
+    color: var(--foreground-color);
+    text-decoration: underline;
+    transition: color 400ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: var(--primary-color) auto 1px;
+}
+  
+.navbar .bg-dark{
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.navbar-brand {
+    font-family: var(--font-family-header);
+    color: var(--foreground-color);
+    font-weight: 600;
+}
+
+.navbar-brand:focus, .navbar-brand:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.nav-link {
+    color: var(--foreground-color);
+    transition: color 400ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.nav-link:focus, .nav-link:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.nav-link:focus-visible {
+  outline: var(--primary-color) auto 1px;
+  box-shadow: 0 0 0 0 rgba(13, 110, 253, .25);
+}
+
+.card {
+    background-color: transparent;
+    border: 1px solid var(--foreground-color);
+    color: var(--foreground-color);
+    border-radius: 0px;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+  font-size: clamp(1.2rem, 2.1vw, 1.44rem);
+  color: var(--foreground-color);
+  
+}
+
+.btn {
+  padding: .5rem 1rem;
+  border-radius: 0;
+}
+
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: 0;
+}
+
+.btn-primary {
+  background-color: var(--background-color);
+  color:var(--foreground-color);
+  border-color: var(--foreground-color);
+}
+
+.btn-primary:hover, .btn-primary:focus-visible, .btn-primary.active {
+  text-decoration: none;
+  background-color: var(--foreground-color);
+  color:var(--background-color);
+  border-color: var(--primary-color);
+}
+
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+  background-color: var(--foreground-color)!important;
+  color: var(--background-color)!important;
+  border-color: var(--primary-color)!important;
+}
+
+.focus-ring:focus-visible {
+  outline: 0;
+  box-shadow: var(--bs-focus-ring-x, 0) var(--bs-focus-ring-y, 0) var(--bs-focus-ring-blur, 0) var(--bs-focus-ring-width, .25rem) var(--primary-color);
+}
+
+.btn.focus-ring:active {
+  outline: 0;
+  box-shadow: var(--bs-focus-ring-x, 0) var(--bs-focus-ring-y, 0) var(--bs-focus-ring-blur, 0) var(--bs-focus-ring-width, .25rem) var(--primary-color) !important;
+}
+
+.btn.focus-ring:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+::-moz-selection {
+  background: var(--primary-color);
+  color: var(--foreground-color);
+}
+
+::selection {
+  background: var(--primary-color);
+  color: var(--foreground-color);
+}
+
+.truchet-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  /* Force the container to a strict 24:12 grid footprint */
+  aspect-ratio: 2 / 1; 
+  overflow: hidden;
+  background-color: transparent;
+}
+
+/* Ensure mobile maintains perfect squares (12 cols / 12 rows) */
+@media (max-width: 767px) {
+  .truchet-canvas-wrapper {
+    aspect-ratio: 1 / 1; 
+  }
+}
+
+.truchet-canvas-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.border-top, .border-bottom {
+  border-color: var(--foreground-color)!important;
+}
