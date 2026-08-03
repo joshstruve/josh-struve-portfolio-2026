@@ -1,6 +1,6 @@
 # jstruve.dev
 
-**Senior Design Engineer Portfolio**
+**Senior UI Developer Portfolio**
 
 ### Overview
 This repository contains the source code for jstruve.dev, demonstrating a rigorous approach to front-end architecture, strict accessibility standards, and systemic UI engineering. The interface is designed to minimize cognitive load and prioritize high-speed scannability by entirely stripping away marketing terminology, visual noise, and heavy frameworks. It serves as a literal proof-of-concept for high-performance, strictly governed web development that explicitly bridges the gap between design theory and technical execution.
