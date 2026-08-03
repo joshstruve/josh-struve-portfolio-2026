@@ -41,13 +41,20 @@ const projects = [
   },
   {
     num: '004',
+    title: "Kessler-Voss Extractive",
+    desc: 'Engineered a cinematic brand experience for a speculative lunar mining corporation, combining agentic AI workflows with a flawless 4x100 Lighthouse audit.',
+    url: 'https://joshstruve.github.io/kessler-voss-extractive/',
+    aria: "View Kessler-Voss Extractive"
+  },
+  {
+    num: '005',
     title: "Tomorrow's Modern Agency",
     desc: 'Architected comprehensive UX/UI wireframes and cross-platform designs in Figma, delivering a dev-ready file structure with strict optimization for design-to-code workflows.',
     url: 'https://www.figma.com/design/psEpMAMM4mTMIwv6T4ZhT1/Tomorrow-s-Modern-Agency?node-id=7-1830&t=92J3RY9ozxDZ62ZA-1',
     aria: "View Tomorrow's Modern Agency Figma Docs"
   },
   {
-    num: '005',
+    num: '006',
     title: "3D Saturn",
     desc: 'Engineered a cinematic WebGL visualization of Saturn using Three.js, featuring dynamic realtime lighting, automated camera choreography, and a multi-pass post-processing pipeline.',
     url: 'https://joshstruve.github.io/3D-Saturn/',
