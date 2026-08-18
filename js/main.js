@@ -3,7 +3,7 @@ const skills = [
   {
     iconPath: '<path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>',
     title: 'Front-End Development',
-    text: 'Next.js, React, TypeScript, Three.js (WebGL), shadcn, Tailwind CSS, Bootstrap, .NET MVC, Web Audio API'
+    text: 'Next.js, React, Angular, TypeScript, Three.js (WebGL), shadcn, Tailwind CSS, Bootstrap, .NET MVC, Web Audio API'
   },
   {
     iconPath: '<line x1="22" x2="2" y1="6" y2="6"/><line x1="22" x2="2" y1="18" y2="18"/><line x1="6" x2="6" y1="2" y2="22"/><line x1="18" x2="18" y1="2" y2="22"/>',
@@ -34,10 +34,10 @@ const projects = [
   },
   {
     num: '003',
-    title: 'Microsoft Azure',
-    desc: 'Managed front-end architecture, publishing processes, and CI/CD pipelines for a Cloud Native React application, delivering technical guidance focused on Azure App, Data, and AI platforms.',
-    url: 'https://azure.github.io/Cloud-Native/Build-IA/30-days-of-ia-2024',
-    aria: 'Visit Microsoft Azure'
+    title: 'M3 A11y',
+    desc: 'Developed an interactive Material 3 accessibility workbench in Angular 19, delivering dynamic HCT tonal palette generation, real-time WCAG 2.2 contrast audits, and multi-format token export.',
+    url: 'https://joshstruve.github.io/m3-a11y/',
+    aria: 'Visit M3 A11y'
   },
   {
     num: '004',
