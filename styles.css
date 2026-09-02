@@ -1,228 +1,307 @@
 :root {
-    --primary-color: oklch(63.9% 0.21 5.3);
-    --background-color: oklch(28.9% 0.007 211.1);
-    --foreground-color: oklch(90.4% 0.015 123.1);
-    --font-family-header: "univers-next-pro", sans-serif;
-    --font-family-body: "inter-variable", sans-serif;
+  /* Direction 3 (Cryo Void) + Neon Magenta Emissive Accent */
+  --primary-color: oklch(0.61 0.23 9.63);
+  /* Vivid Magenta */
+  --background-color: oklch(13% 0.005 250);
+  /* Carbon Void */
+  --foreground-color: oklch(98% 0 0);
+  /* Crisp White */
+  --border-color: oklch(32% 0.01 250);
+  /* Technical Steel Hairline */
+  --text-muted: oklch(65% 0.01 250);
+  /* Secondary Muted Text */
+
+  --font-family-header: "Michroma", sans-serif;
+  --font-family-body: "Inter", sans-serif;
 }
 
 html {
-    scroll-behavior: smooth;
-    text-rendering: optimizeLegibility;
-    font-display: swap;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
 }
 
+/* Base Body: Unclipped backdrop root for global blur sampling */
 body {
-    margin: 0;
-    font-family: var(--font-family-body);
-    background-color: var(--background-color);
-    color: var(--foreground-color);
-    overflow-x: hidden;
-    font-size: 1rem;
-    -webkit-font-smoothing: antialiased;
-    opacity: 0.01;
-    animation: fadeInEntrance 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    will-change: opacity;
+  margin: 0;
+  font-family: var(--font-family-body);
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  overflow-x: clip;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Page entrance scoped to content layers */
+#hero,
+main,
+footer {
+  animation: fadeInEntrance 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 @keyframes fadeInEntrance {
   from {
-      opacity: 0.01;
+    opacity: 0.01;
   }
+
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6, .small {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-family: var(--font-family-header);
-    font-weight: 700;
+/* Full-width Shader Host Containers */
+.shader-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--background-color);
 }
 
-.h1, h1 {
-  font-size: clamp(2.1rem, 4.6vw, 2.986rem);
+.shader-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.h2, h2 {
-  font-size: clamp(1.8rem, 3.8vw, 2.488rem);
+/* Hero Section */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: clamp(15rem, 28vw, 20rem);
+  padding-bottom: clamp(7rem, 16vw, 12rem);
 }
 
-.h3, h3 {
-  font-size: clamp(1.55rem, 3.2vw, 2.074rem);
+/* Footer Section */
+.footer-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
-.h4, h4 {
-  font-size: clamp(1.35rem, 2.6vw, 1.728rem);
+/* Fixed Glass Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
+  z-index: 1030;
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    -webkit-backdrop-filter 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.h5, h5 {
-  font-size: clamp(1.2rem, 2.1vw, 1.44rem);
+.navbar.is-scrolled {
+  background-color: oklch(13% 0.005 250 / 0.72);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
 }
 
-.h6, h6 {
-  font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+.navbar-brand {
+  font-family: var(--font-family-header);
+  font-size: 1rem;
+  color: var(--foreground-color);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.small {
-    font-size: 1rem;
-    text-transform: uppercase;
-    color: var(--foreground);
+.navbar-brand:focus,
+.navbar-brand:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* Nav Links */
+.nav-link {
+  font-family: var(--font-family-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--foreground-color);
+  text-decoration: none;
+  transition: color 300ms ease;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* Override Bootstrap's blue focus shadow on nav elements */
+.nav-link:focus-visible,
+.navbar-brand:focus-visible {
+  outline: var(--primary-color) solid 2px;
+  outline-offset: 4px;
+  box-shadow: none !important;
+}
+
+/* Headers */
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: var(--font-family-header);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+h1,
+.h1 {
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  font-weight: 700;
+}
+
+h2,
+.h2 {
+  font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+  font-weight: 700;
+}
+
+h3,
+.h3 {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  font-weight: 600;
 }
 
 .sub-title {
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: .85rem;
+  font-family: var(--font-family-body);
+  font-size: 1rem;
   font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
 }
 
+.border-accent {
+  border-color: var(--border-color) !important;
+  opacity: 1 !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* Global Links */
 a {
-    color: var(--foreground-color);
-    text-decoration: underline;
-    transition: color 400ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  font-family: var(--font-family-body);
+  color: var(--foreground-color);
+  text-decoration: underline;
+  transition: color 300ms ease;
 }
 
 a:hover {
   color: var(--primary-color);
-  text-decoration: underline;
 }
 
 :focus-visible {
-  outline: var(--primary-color) auto 1px;
-}
-  
-.navbar .bg-dark{
-    background-color: var(--background);
-    color: var(--foreground);
+  outline: var(--primary-color) solid 2px;
+  outline-offset: 2px;
 }
 
-.navbar-collapse {
-    justify-content: flex-end;
-}
-
-.navbar-brand {
-    font-family: var(--font-family-header);
-    color: var(--foreground-color);
-    font-weight: 600;
-}
-
-.navbar-brand:focus, .navbar-brand:hover {
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-.nav-link {
-    color: var(--foreground-color);
-    transition: color 400ms cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-.nav-link:focus, .nav-link:hover {
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-.nav-link:focus-visible {
-  outline: var(--primary-color) auto 1px;
-  box-shadow: 0 0 0 0 rgba(13, 110, 253, .25);
-}
-
+/* Cards */
 .card {
-    background-color: transparent;
-    border: 1px solid var(--foreground-color);
-    color: var(--foreground-color);
-    border-radius: 0px;
+  background-color: oklch(16% 0.008 250 / 0.7);
+  border: 1px solid var(--border-color);
+  color: var(--foreground-color);
+  border-radius: 0;
+  transition: border-color 300ms ease, background-color 300ms ease;
+}
+
+.card:hover {
+  border-color: var(--primary-color);
+  background-color: oklch(18% 0.01 250 / 0.85);
 }
 
 .card-body {
-    padding: 1.5rem;
+  padding: 1.5rem;
 }
 
 .card-title {
-  font-size: clamp(1.2rem, 2.1vw, 1.44rem);
+  font-family: var(--font-family-header);
+  font-size: 1.1rem;
   color: var(--foreground-color);
-  
 }
 
-.btn {
-  padding: .5rem 1rem;
-  border-radius: 0;
+/* Work Items */
+.project-item .project-num,
+.project-item .project-link {
+  transition: color 300ms ease;
 }
 
-.btn:focus-visible {
-  outline: 0;
-  box-shadow: 0;
+.project-item:hover .project-num,
+.project-item:focus-within .project-num,
+.project-item:hover .project-link,
+.project-item:focus-within .project-link {
+  color: var(--primary-color);
 }
 
-.btn-primary {
-  background-color: var(--background-color);
-  color:var(--foreground-color);
-  border-color: var(--foreground-color);
-}
-
-.btn-primary:hover, .btn-primary:focus-visible, .btn-primary.active {
-  text-decoration: none;
-  background-color: var(--foreground-color);
-  color:var(--background-color);
-  border-color: var(--primary-color);
-}
-
-.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
-  background-color: var(--foreground-color)!important;
-  color: var(--background-color)!important;
-  border-color: var(--primary-color)!important;
-}
-
+/* Focus Ring Utility */
+.focus-ring:focus,
 .focus-ring:focus-visible {
-  outline: 0;
-  box-shadow: var(--bs-focus-ring-x, 0) var(--bs-focus-ring-y, 0) var(--bs-focus-ring-blur, 0) var(--bs-focus-ring-width, .25rem) var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 0.25rem oklch(0.61 0.23 9.63 / 0.45) !important;
 }
 
-.btn.focus-ring:active {
-  outline: 0;
-  box-shadow: var(--bs-focus-ring-x, 0) var(--bs-focus-ring-y, 0) var(--bs-focus-ring-blur, 0) var(--bs-focus-ring-width, .25rem) var(--primary-color) !important;
-}
+/* Primary Button & Explicit State Handling */
+.btn-primary {
+  --bs-btn-color: var(--foreground-color);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: var(--border-color);
+  --bs-btn-hover-color: var(--background-color);
+  --bs-btn-hover-bg: var(--primary-color);
+  --bs-btn-hover-border-color: var(--primary-color);
+  --bs-btn-focus-shadow-rgb: none;
+  --bs-btn-active-color: var(--background-color);
+  --bs-btn-active-bg: oklch(0.70 0.20 9.63);
+  --bs-btn-active-border-color: oklch(0.70 0.20 9.63);
 
-.btn.focus-ring:focus:not(:focus-visible) {
-  box-shadow: none;
-}
-
-::-moz-selection {
-  background: var(--primary-color);
+  background-color: transparent;
   color: var(--foreground-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  font-family: var(--font-family-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0.75rem 1.75rem;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
 }
+
+/* Active / Pressed State */
+.btn-primary:active,
+.btn-primary.active,
+:not(.btn-check)+.btn-primary:active,
+.btn-primary:first-child:active {
+  background-color: oklch(0.70 0.20 9.63) !important;
+  color: var(--background-color) !important;
+  border-color: oklch(0.70 0.20 9.63) !important;
+  transform: translateY(1px);
+}
+
 
 ::selection {
   background: var(--primary-color);
-  color: var(--foreground-color);
-}
-
-.truchet-canvas-wrapper {
-  position: relative;
-  width: 100%;
-  /* Force the container to a strict 24:12 grid footprint */
-  aspect-ratio: 2 / 1; 
-  overflow: hidden;
-  background-color: transparent;
-}
-
-/* Ensure mobile maintains perfect squares (12 cols / 12 rows) */
-@media (max-width: 767px) {
-  .truchet-canvas-wrapper {
-    aspect-ratio: 1 / 1; 
-  }
-}
-
-.truchet-canvas-wrapper canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.border-top, .border-bottom {
-  border-color: var(--foreground-color)!important;
+  color: var(--background-color);
 }

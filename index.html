@@ -1,68 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jstruve.dev</title>
+  <title>Josh Struve</title>
   <meta name="description" content="Josh Struve | Senior UI Developer: Design Systems, Accessibility and Applied AI.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jstruve.dev/">
   <meta property="og:title" content="jstruve.dev | Senior UI Developer">
-  <meta property="og:description" content="Senior UI Developer with 25 years of experience specializing in design systems, accessibility, and applied AI.">
+  <meta property="og:description"
+    content="Senior UI Developer with 25 years of experience specializing in design systems, accessibility, and applied AI.">
   <meta property="og:image" content="https://jstruve.dev/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://jstruve.dev/">
   <meta name="twitter:title" content="jstruve.dev | Senior UI Developer">
-  <meta name="twitter:description" content="Senior UI Developer with 25 years of experience specializing in design systems, accessibility, and applied AI.">
+  <meta name="twitter:description"
+    content="Senior UI Developer with 25 years of experience specializing in design systems, accessibility, and applied AI.">
   <meta name="twitter:image" content="https://jstruve.dev/og-image.jpg">
-  <link rel="stylesheet" href="https://use.typekit.net/oep2nml.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Michroma&display=swap">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Michroma&display=swap">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg py-0">
-    <div class="container">
-      <a class="navbar-brand py-3" href="/">Josh Struve</a>
-      <div class="navbar d-none d-lg-block" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
-          <li class="nav-item"><a class="nav-link" href="#connect">Connect</a></li>
+  <!-- Fixed glass navbar pinned to the global viewport -->
+  <nav id="siteNav" class="navbar navbar-expand-lg py-0 fixed-top">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand my-3" href="/">Josh Struve</a>
+      <div class="d-none d-lg-block" id="navbarNav">
+        <ul class="navbar-nav flex-row gap-4 mb-0">
+          <li class="nav-item"><a class="nav-link px-0" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link px-0" href="#work">Work</a></li>
+          <li class="nav-item"><a class="nav-link px-0" href="#connect">Connect</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <main>
-    <section id="hero">
-      <div class="container">
-        <hr class="my-0" style="border-color:var(--foreground-color); opacity: 1;">
-        <h1 class="mb-1 pt-5">Senior UI Developer</h1>
-        <p class="mb-0 sub-title pb-3">Design Systems — Accessibility — Applied AI</p>
-        
-        <div class="truchet-canvas-wrapper">
-          <canvas id="truchetCanvas"></canvas>
-        </div>
-      </div>
-    </section>
+  <!-- Full-width hero with padding-controlled scale and canvas background -->
+  <header id="hero" class="shader-section">
+    <canvas class="shader-canvas" aria-hidden="true"></canvas>
 
+    <div class="hero-content">
+      <div class="container">
+        <h1 class="mb-2">Senior UI Developer</h1>
+        <p class="mb-0 sub-title">Design Systems — Accessibility — Applied AI</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
     <section id="about" class="pt-5">
       <div class="container">
         <div class="row g-3">
           <div class="col-12 col-lg-9">
-            <h2 class="mb-1">About</h2>
-            <p class="mb-0">Senior software developer with 25 years of experience specializing in design systems, accessibility, and applied AI.</p>
+            <h2 class="mb-2">About</h2>
+            <p class="mb-0 text-muted">Senior software developer with 25 years of experience specializing in design
+              systems,
+              accessibility, and applied AI.</p>
           </div>
         </div>
 
-        <!-- Skills injected here -->
-        <div class="row g-3 pt-3" id="skills-container"></div>
-        
+        <!-- Pre-baked Skills -->
+        <div class="row g-3 pt-4" id="skills-container">
+          <div class="col-12 col-lg-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <p>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m7 11 2-2-2-2" />
+                    <path d="M11 13h4" />
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                  </svg>
+                </p>
+                <h3 class="card-title">Front-End Development</h3>
+                <p class="card-text text-muted mb-0">Next.js, React, Angular, TypeScript, Three.js (WebGL), shadcn,
+                  Tailwind CSS, Bootstrap, .NET MVC, Web Audio API</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <p>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" x2="2" y1="6" y2="6" />
+                    <line x1="22" x2="2" y1="18" y2="18" />
+                    <line x1="6" x2="6" y1="2" y2="22" />
+                    <line x1="18" x2="18" y1="2" y2="22" />
+                  </svg>
+                </p>
+                <h3 class="card-title">Design Systems</h3>
+                <p class="card-text text-muted mb-0">WCAG 2.2 Accessibility (A11y), Component Architecture, Design
+                  Tokens, Figma Design Systems, Brand Guidelines, Motion & 3D Design</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <p>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 10.27 7 3.34" />
+                    <path d="m11 13.73-4 6.93" />
+                    <path d="M12 22v-2" />
+                    <path d="M12 2v2" />
+                    <path d="M14 12h8" />
+                    <path d="m17 20.66-1-1.73" />
+                    <path d="m17 3.34-1 1.73" />
+                    <path d="M2 12h2" />
+                    <path d="m20.66 17-1.73-1" />
+                    <path d="m20.66 7-1.73 1" />
+                    <path d="m3.34 17 1.73-1" />
+                    <path d="m3.34 7 1.73 1" />
+                    <circle cx="12" cy="12" r="2" />
+                    <circle cx="12" cy="12" r="8" />
+                  </svg>
+                </p>
+                <h3 class="card-title">Tools & Platforms</h3>
+                <p class="card-text text-muted mb-0">Generative AI Workflow, Google Lighthouse, Vercel/Netlify, CI/CD
+                  Pipelines, Node.js, Azure, Shopify, Figma/Adobe CC</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-12 mt-5 text-center">
-            <a class="btn btn-primary focus-ring" href="./downloads/josh-struve-ui-developer-resume-2026.pdf" download>Download resume</a>
+            <a class="btn btn-primary focus-ring" href="./downloads/josh-struve-ui-developer-resume-2026.pdf"
+              download>Download resume</a>
           </div>
         </div>
       </div>
@@ -70,37 +151,199 @@
 
     <section id="work" class="pt-5">
       <div class="container">
-        <h2 class="mb-1">Work</h2>
-        <p>Enterprise and independent projects demonstrating expertise in design systems, accessibility, and front-end architecture.</p>
-        <hr class="my-0" style="border-color:var(--foreground-color); opacity: 1;">
+        <h2 class="mb-2">Work</h2>
+        <p class="text-muted">Enterprise and independent projects demonstrating expertise in design systems,
+          accessibility, and front-end
+          architecture.</p>
+        <hr class="my-0 border-accent">
 
-        <!-- Work items injected here -->
-        <div id="work-container"></div>
+        <!-- Pre-baked Work Items -->
+        <div id="work-container">
+          <div class="row py-5 d-flex align-items-center position-relative project-item">
+            <div class="col-12 col-md-8">
+              <p class="sub-title project-num mb-3">001</p>
+              <h3 class="mb-2">Microsoft Developer</h3>
+              <p class="mb-md-0 text-muted">Led front-end engineering for the Microsoft Developer homepage, building a
+                component architecture to ensure design system alignment, accessibility compliance, and performance
+                optimization.</p>
+            </div>
+            <div class="col-12 col-md-4 text-md-end pt-3 pt-md-0">
+              <a href="https://developer.microsoft.com/en-us/" target="_blank" class="stretched-link project-link"
+                aria-label="Visit Microsoft Developer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <hr class="my-0 border-accent">
+
+          <div class="row py-5 d-flex align-items-center position-relative project-item">
+            <div class="col-12 col-md-8">
+              <p class="sub-title project-num mb-3">002</p>
+              <h3 class="mb-2">Microsoft Learn</h3>
+              <p class="mb-md-0 text-muted">Led front-end development to migrate standalone marketing properties onto
+                the Microsoft Learn platform, ensuring strict design system alignment, accessibility compliance, and
+                platform security.</p>
+            </div>
+            <div class="col-12 col-md-4 text-md-end pt-3 pt-md-0">
+              <a href="https://learn.microsoft.com/en-us/training/training-services-partners" target="_blank"
+                class="stretched-link project-link" aria-label="Visit Microsoft Learn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <hr class="my-0 border-accent">
+
+          <div class="row py-5 d-flex align-items-center position-relative project-item">
+            <div class="col-12 col-md-8">
+              <p class="sub-title project-num mb-3">003</p>
+              <h3 class="mb-2">VOXFM Design System</h3>
+              <p class="mb-md-0 text-muted">Designed and developed a prototype design system for a generative AI music
+                creation suite, combining Next.js 16, Tailwind CSS v4, Radix UI, WebGL, and Google Antigravity to
+                achieve a perfect Lighthouse audit.</p>
+            </div>
+            <div class="col-12 col-md-4 text-md-end pt-3 pt-md-0">
+              <a href="https://joshstruve.github.io/voxfm-design-system/" target="_blank"
+                class="stretched-link project-link" aria-label="Visit the VOXFM Design system">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <hr class="my-0 border-accent">
+
+          <div class="row py-5 d-flex align-items-center position-relative project-item">
+            <div class="col-12 col-md-8">
+              <p class="sub-title project-num mb-3">004</p>
+              <h3 class="mb-2">M3 A11y</h3>
+              <p class="mb-md-0 text-muted">Developed an interactive Material 3 accessibility workbench in Angular 19,
+                delivering dynamic HCT tonal palette generation, real-time WCAG 2.2 contrast audits, and multi-format
+                token export.</p>
+            </div>
+            <div class="col-12 col-md-4 text-md-end pt-3 pt-md-0">
+              <a href="https://joshstruve.github.io/m3-a11y/" target="_blank" class="stretched-link project-link"
+                aria-label="Visit M3 A11y">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <hr class="my-0 border-accent">
+
+          <div class="row py-5 d-flex align-items-center position-relative project-item">
+            <div class="col-12 col-md-8">
+              <p class="sub-title project-num mb-3">005</p>
+              <h3 class="mb-2">Kessler-Voss Extractive</h3>
+              <p class="mb-md-0 text-muted">Engineered a cinematic brand experience for a speculative lunar mining
+                corporation, combining agentic AI workflows with a flawless 4x100 Lighthouse audit.</p>
+            </div>
+            <div class="col-12 col-md-4 text-md-end pt-3 pt-md-0">
+              <a href="https://joshstruve.github.io/kessler-voss-extractive/" target="_blank"
+                class="stretched-link project-link" aria-label="View Kessler-Voss Extractive">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <hr class="my-0 border-accent">
+
+          <div class="row py-5 d-flex align-items-center position-relative project-item">
+            <div class="col-12 col-md-8">
+              <p class="sub-title project-num mb-3">006</p>
+              <h3 class="mb-2">Tomorrow's Modern Agency</h3>
+              <p class="mb-md-0 text-muted">Architected comprehensive UX/UI wireframes and cross-platform designs in
+                Figma, delivering a dev-ready file structure with strict optimization for design-to-code workflows.</p>
+            </div>
+            <div class="col-12 col-md-4 text-md-end pt-3 pt-md-0">
+              <a href="https://www.figma.com/design/psEpMAMM4mTMIwv6T4ZhT1/Tomorrow-s-Modern-Agency?node-id=7-1830&t=92J3RY9ozxDZ62ZA-1"
+                target="_blank" class="stretched-link project-link"
+                aria-label="View Tomorrow's Modern Agency Figma Docs">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <hr class="my-0 border-accent">
+
+          <div class="row py-5 d-flex align-items-center position-relative project-item">
+            <div class="col-12 col-md-8">
+              <p class="sub-title project-num mb-3">007</p>
+              <h3 class="mb-2">3D Saturn</h3>
+              <p class="mb-md-0 text-muted">Engineered a cinematic WebGL visualization of Saturn using Three.js,
+                featuring dynamic realtime lighting, automated camera choreography, and a multi-pass post-processing
+                pipeline.</p>
+            </div>
+            <div class="col-12 col-md-4 text-md-end pt-3 pt-md-0">
+              <a href="https://joshstruve.github.io/3D-Saturn/" target="_blank" class="stretched-link project-link"
+                aria-label="View 3D Saturn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <hr class="my-0 border-accent">
+        </div>
       </div>
     </section>
 
-    <section id="connect">
+    <section id="connect" class="pb-5">
       <div class="container pt-5">
         <div class="row g-3">
           <div class="col-12 col-lg-8">
-            <h2 class="mb-1">Connect</h2>
-            <p class="mb-0">LinkedIn is the best way to reach me, so please connect.</p>
-            <a class="btn btn-primary focus-ring mt-5" href="https://www.linkedin.com/in/joshstruve/" target="_blank">Connect on LinkedIn</a>
+            <h2 class="mb-2">Connect</h2>
+            <p class="mb-0 text-muted">LinkedIn is the best way to reach me, so please connect.</p>
+            <a class="btn btn-primary focus-ring mt-5" href="https://www.linkedin.com/in/joshstruve/"
+              target="_blank">Connect on LinkedIn</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container pt-5">
-      <hr class="mt-0" style="border-color:var(--foreground-color); opacity: 1;">
-      <p class="text-end">&copy; 2026</p>
+  <!-- Full-width footer with shader background -->
+  <footer id="footer" class="shader-section">
+    <canvas class="shader-canvas" aria-hidden="true"></canvas>
+
+    <div class="footer-content">
+      <div class="container py-3">
+        <p class="text-end text-muted mb-0">&copy; 2026</p>
+      </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script> -->
   <script type="module" src="js/main.js"></script>
-
 </body>
+
 </html>
