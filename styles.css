@@ -305,3 +305,10 @@ a:hover {
   background: var(--primary-color);
   color: var(--background-color);
 }
+
+/* Anchor Offset: Reserves clearance for the fixed navbar */
+#about,
+#work,
+#connect {
+  scroll-margin-top: 3rem;
+}
