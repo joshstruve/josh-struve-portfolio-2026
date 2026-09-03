@@ -15,14 +15,14 @@ function initStickyNavbar() {
 }
 
 // Inlined Shaders: Zero network round-trips
-const vertexShaderSource = `
+const vertexShaderSource = /* glsl */ `
   attribute vec2 position;
   void main() {
     gl_Position = vec4(position, 0.0, 1.0);
   }
 `;
 
-const fragmentShaderSource = `
+const fragmentShaderSource = /* glsl */ `
   precision highp float;
   uniform vec2 u_resolution;
   uniform float u_time;
@@ -223,37 +223,49 @@ function setupCanvas(canvas) {
       canvas.width = width;
       canvas.height = height;
       gl.viewport(0, 0, width, height);
+
+      // Render a static frame if user prefers reduced motion
+      if (prefersReducedMotion && isVisible) {
+        renderFrame(0.0);
+      }
     }
   }
 
   window.addEventListener('resize', resize, { passive: true });
-  resize();
 
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let isVisible = false;
   let animationId = null;
   const epoch = performance.now();
 
-  function loop(now) {
-    if (!isVisible) return;
-
+  function renderFrame(timeValue) {
     gl.useProgram(program);
     gl.enableVertexAttribArray(posAttr);
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.vertexAttribPointer(posAttr, 2, gl.FLOAT, false, 0, 0);
 
     if (resUniform) gl.uniform2f(resUniform, canvas.width, canvas.height);
-    if (timeUniform) gl.uniform1f(timeUniform, (now - epoch) * 0.001);
+    if (timeUniform) gl.uniform1f(timeUniform, timeValue);
 
     gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }
+
+  function loop(now) {
+    if (!isVisible) return;
+    renderFrame((now - epoch) * 0.001);
     animationId = requestAnimationFrame(loop);
   }
 
-  // IntersectionObserver: Halts render loop completely when off-screen
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       isVisible = entry.isIntersecting;
+
       if (isVisible) {
-        if (!animationId) animationId = requestAnimationFrame(loop);
+        if (prefersReducedMotion) {
+          renderFrame(0.0);
+        } else if (!animationId) {
+          animationId = requestAnimationFrame(loop);
+        }
       } else {
         if (animationId) {
           cancelAnimationFrame(animationId);
@@ -263,6 +275,7 @@ function setupCanvas(canvas) {
     });
   }, { threshold: 0.01 });
 
+  resize();
   observer.observe(canvas.parentElement);
 }
 
