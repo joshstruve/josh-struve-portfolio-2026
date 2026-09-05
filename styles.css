@@ -474,6 +474,7 @@
   .card-icon {
     display: inline-flex;
     align-items: center;
+    margin-bottom: 1rem;
   }
 
   .card-title {
