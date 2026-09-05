@@ -14,6 +14,141 @@ function initStickyNavbar() {
   handleScroll();
 }
 
+function initHeaderReveals() {
+  const headers = document.querySelectorAll('.reveal-header, .card-title, .project-info h3');
+  if (!headers.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let pendingBatch = [];
+  let batchTimeout = null;
+
+  function getHeadingLevel(el) {
+    const tag = el.tagName.toUpperCase();
+    if (tag === 'H1') return 1;
+    if (tag === 'H2') return 2;
+    if (tag === 'H3') return 3;
+    return 4;
+  }
+
+  function processBatch() {
+    if (!pendingBatch.length) return;
+
+    const batch = [...pendingBatch];
+    pendingBatch = [];
+    batchTimeout = null;
+
+    // 1. Sort hierarchically: H1 (1) -> H2 (2) -> H3 (3)
+    // 2. For identical tiers, preserve visual DOM reading order (top-to-bottom, left-to-right)
+    batch.sort((a, b) => {
+      const levelA = getHeadingLevel(a);
+      const levelB = getHeadingLevel(b);
+      if (levelA !== levelB) {
+        return levelA - levelB;
+      }
+      const rectA = a.getBoundingClientRect();
+      const rectB = b.getBoundingClientRect();
+      if (Math.abs(rectA.top - rectB.top) > 15) {
+        return rectA.top - rectB.top;
+      }
+      return rectA.left - rectB.left;
+    });
+
+    let accumulatedDelay = 0.12;
+
+    batch.forEach((el, index) => {
+      const isH1 = el.tagName === 'H1';
+      const isH2 = el.tagName === 'H2';
+      const isH3 = el.tagName === 'H3';
+
+      const customDelay = parseFloat(el.dataset.delay || 0);
+      if (index === 0 && customDelay > 0) {
+        accumulatedDelay = customDelay;
+      }
+
+      el.style.setProperty('--base-delay', `${accumulatedDelay.toFixed(3)}s`);
+      el.classList.add('is-revealed');
+
+      // Calculate character stagger duration to sequence the next header
+      const rawText = el.getAttribute('aria-label') || '';
+      const stagger = parseFloat(el.dataset.stagger || (isH3 ? 0.025 : (isH2 ? 0.045 : 0.05)));
+      const textDuration = rawText.length * stagger;
+
+      // Controlled step gap so lower tiers begin right as the parent tier resolves
+      const stepGap = isH1 ? 0.40 : (isH2 ? 0.32 : 0.20);
+      accumulatedDelay += Math.min(textDuration, stepGap) + 0.12;
+    });
+  }
+
+  // -16% bottom rootMargin requires headers to scroll ~16% into the viewport before firing
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        obs.unobserve(entry.target);
+
+        if (prefersReducedMotion) {
+          entry.target.classList.add('is-revealed');
+        } else {
+          pendingBatch.push(entry.target);
+          if (!batchTimeout) {
+            batchTimeout = setTimeout(processBatch, 40);
+          }
+        }
+      }
+    });
+  }, {
+    rootMargin: '0px 0px -16% 0px',
+    threshold: 0.1
+  });
+
+  headers.forEach(el => {
+    const rawText = el.textContent.trim();
+    const isH3 = el.tagName === 'H3';
+    const stagger = parseFloat(el.dataset.stagger || (isH3 ? 0.025 : 0.045));
+
+    el.classList.add('reveal-header');
+    el.setAttribute('aria-label', rawText);
+    el.style.setProperty('--stagger', `${stagger}s`);
+    el.textContent = '';
+
+    const spanGroup = document.createElement('span');
+    spanGroup.setAttribute('aria-hidden', 'true');
+    spanGroup.style.display = 'contents';
+
+    let globalIndex = 0;
+    const words = rawText.split(' ');
+
+    words.forEach((word, wIdx) => {
+      const wordBox = document.createElement('span');
+      wordBox.className = 'word-box';
+
+      [...word].forEach(char => {
+        const charBox = document.createElement('span');
+        charBox.className = 'char-box';
+        charBox.style.setProperty('--i', globalIndex++);
+        charBox.innerHTML = `<span class="char-line"></span><span class="char-glyph">${char}</span>`;
+        wordBox.appendChild(charBox);
+      });
+
+      spanGroup.appendChild(wordBox);
+
+      if (wIdx < words.length - 1) {
+        const space = document.createElement('span');
+        space.className = 'char-box space';
+        spanGroup.appendChild(space);
+      }
+    });
+
+    el.appendChild(spanGroup);
+
+    if (prefersReducedMotion) {
+      el.classList.add('is-revealed');
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+
 // Inlined Shaders: Zero network round-trips
 const vertexShaderSource = /* glsl */ `
   attribute vec2 position;
@@ -224,7 +359,6 @@ function setupCanvas(canvas) {
       canvas.height = height;
       gl.viewport(0, 0, width, height);
 
-      // Render a static frame if user prefers reduced motion
       if (prefersReducedMotion && isVisible) {
         renderFrame(0.0);
       }
@@ -286,5 +420,6 @@ function initShaders() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initStickyNavbar();
+  initHeaderReveals();
   initShaders();
 });
