@@ -96,7 +96,6 @@
 
   h1 {
     font-size: clamp(var(--step-4), 4.5vw, var(--step-6));
-    /* 2.441rem -> 3.815rem */
     font-weight: 500;
     letter-spacing: 0.12em;
     margin-bottom: 0.75rem;
@@ -104,7 +103,6 @@
 
   h2 {
     font-size: clamp(var(--step-3), 3.4vw, var(--step-5));
-    /* 1.953rem -> 3.052rem */
     font-weight: 500;
     letter-spacing: 0.14em;
     margin-bottom: 0.5rem;
@@ -112,7 +110,6 @@
 
   h3 {
     font-size: clamp(var(--step-2), 2.5vw, var(--step-4));
-    /* 1.563rem -> 2.441rem */
     font-weight: 400;
     letter-spacing: 0.16em;
     margin-bottom: 0.5rem;
@@ -332,24 +329,32 @@
     }
   }
 
-  /* Accessibility: Skip Navigation Link */
-  .skip-to-content {
-    position: absolute;
-    top: -100px;
-    left: 1.5rem;
-    z-index: 9999;
-    background-color: var(--primary-color);
-    color: var(--background-color);
-    padding: 0.5rem 1rem;
-    font-family: var(--font-family-body);
-    font-size: var(--step--1);
-    font-weight: 500;
-    text-decoration: none;
-    transition: top 150ms ease;
+  /* Accessibility: Full-Width Top Overlay Banner (Aligned with Navbar Height) */
+  .skip-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--nav-clearance);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 1.5rem;
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    transform: translateY(-100%);
+    transition: transform 150ms var(--ease-standard);
   }
 
-  .skip-to-content:focus {
-    top: 1rem;
+  .skip-container:focus-within {
+    transform: translateY(0);
+  }
+
+  .skip-to-content {
+    font-size: var(--step-0);
+    text-underline-offset: 4px;
   }
 
   /* Fixed Glass Navbar */
@@ -359,6 +364,7 @@
     left: 0;
     right: 0;
     width: 100%;
+    height: var(--nav-clearance);
     background-color: transparent;
     border-bottom: 1px solid transparent;
     -webkit-backdrop-filter: blur(0px);
@@ -381,7 +387,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-block: 1rem;
+    height: 100%;
   }
 
   .navbar-brand {
@@ -571,33 +577,34 @@
     padding: 0.75rem 1.75rem;
     border-radius: 0;
     border: 1px solid transparent;
-    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 200ms ease, transform 100ms ease;
+    transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
   }
 
   .btn-primary {
-    background-color: transparent;
+    background-color: var(--surface-card);
     color: var(--foreground-color);
     border-color: var(--border-color);
   }
 
   .btn-primary:hover {
-    background-color: var(--primary-color);
-    color: var(--background-color);
+    background-color: var(--surface-card-hover);
+    color: var(--foreground-color);
     border-color: var(--primary-color);
     text-decoration: none;
   }
 
-  .btn-primary:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 0.25rem var(--focus-ring);
-    border-color: var(--primary-color);
-  }
-
+  .btn:focus,
+  .btn:focus-visible,
+  .btn:active,
+  .btn-primary:focus,
+  .btn-primary:focus-visible,
   .btn-primary:active {
-    background-color: var(--primary-color-active);
-    color: var(--background-color);
-    border-color: var(--primary-color-active);
-    transform: translateY(1px);
+    outline: none;
+    border-width: 3px;
+    border-color: var(--primary-color);
+    padding: calc(0.75rem - 2px) calc(1.75rem - 2px);
+    background-color: var(--surface-card-hover);
+    color: var(--foreground-color);
   }
 
   .resume-action {
