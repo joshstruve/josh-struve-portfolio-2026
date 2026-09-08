@@ -520,7 +520,7 @@
   }
 
   .project-num {
-    margin-bottom: 0.75rem;
+    margin-bottom: 2rem;
     font-family: var(--font-family-header);
     font-size: var(--step-0);
   }
