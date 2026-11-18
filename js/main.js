@@ -1,4 +1,8 @@
 function initStickyNavbar() {
+  if (CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')) {
+    return;
+  }
+
   const nav = document.getElementById('siteNav');
   if (!nav) return;
 
@@ -126,7 +130,15 @@ function initHeaderReveals() {
         const charBox = document.createElement('span');
         charBox.className = 'char-box';
         charBox.style.setProperty('--i', globalIndex++);
-        charBox.innerHTML = `<span class="char-line"></span><span class="char-glyph">${char}</span>`;
+
+        const charLine = document.createElement('span');
+        charLine.className = 'char-line';
+
+        const charGlyph = document.createElement('span');
+        charGlyph.className = 'char-glyph';
+        charGlyph.textContent = char;
+
+        charBox.append(charLine, charGlyph);
         wordBox.appendChild(charBox);
       });
 
@@ -365,8 +377,6 @@ function setupCanvas(canvas) {
     }
   }
 
-  window.addEventListener('resize', resize, { passive: true });
-
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let isVisible = false;
   let animationId = null;
@@ -385,27 +395,36 @@ function setupCanvas(canvas) {
   }
 
   function loop(now) {
-    if (!isVisible) return;
+    if (!isVisible || document.hidden) {
+      animationId = null;
+      return;
+    }
     renderFrame((now - epoch) * 0.001);
     animationId = requestAnimationFrame(loop);
   }
 
+  function syncPlayback() {
+    if (isVisible && !document.hidden) {
+      if (prefersReducedMotion) {
+        renderFrame(0.0);
+      } else if (!animationId) {
+        animationId = requestAnimationFrame(loop);
+      }
+    } else if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+  }
+
+  const resizeObserver = new ResizeObserver(resize);
+  resizeObserver.observe(canvas.parentElement || canvas);
+
+  document.addEventListener('visibilitychange', syncPlayback);
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       isVisible = entry.isIntersecting;
-
-      if (isVisible) {
-        if (prefersReducedMotion) {
-          renderFrame(0.0);
-        } else if (!animationId) {
-          animationId = requestAnimationFrame(loop);
-        }
-      } else {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-          animationId = null;
-        }
-      }
+      syncPlayback();
     });
   }, { threshold: 0.01 });
 
